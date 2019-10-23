@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/person_item"
+              android:layout_marginTop="12dp"
+              app:cardCornerRadius="16sp"
+              app:cardElevation="2dp"
+>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+
+    >
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_person"
+                android:hint="Name"
+                android:textSize="25sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+        />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/last_name_person"
+                android:hint="Last name"
+                android:textSize="25sp"
+                app:layout_constraintTop_toBottomOf="@id/name_person"
+                app:layout_constraintBottom_toTopOf="@id/bday_person"
+                app:layout_constraintStart_toStartOf="parent"
+        />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bday_person"
+                android:hint="B-day"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/last_name_person"
+                app:layout_constraintBottom_toTopOf="@id/spec_person"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+        />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spec_person"
+                android:hint="Specialty"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/bday_person"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+
+        />
+
+
+
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/avatar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
