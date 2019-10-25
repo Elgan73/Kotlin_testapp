@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.R
 import com.stark.test65apps.presentation.persons.PersonItem
 import com.stark.test65apps.presentation.persons.PersonsFragment
@@ -56,7 +57,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemClickLis
             adapter = specAdapter
         }
 
-        mSpecPresenter.getData()
+//        mSpecPresenter.getData(resources.getStringArray(R.array.))
 
 
 
@@ -73,7 +74,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemClickLis
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        mSpecPresenter.getData()
+        mSpecPresenter.getData(id.toInt())
     }
 
 }

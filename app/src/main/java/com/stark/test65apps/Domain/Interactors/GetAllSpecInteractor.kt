@@ -2,6 +2,7 @@ package com.stark.test65apps.Domain.Interactors
 
 import android.util.Log
 import com.stark.test65apps.App
+import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.presentation.persons.PersonItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,12 +11,12 @@ import java.lang.Exception
 
 object GetAllSpecInteractor {
 
-    fun execute(onComplete: (List<PersonItem>) -> Unit) {
+    fun execute(spec: Int, onComplete: (List<PersonItem>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = App.personRepository.getSpec()
+            val response = App.personRepository.getSpec(spec)
 
             try {
-                onComplete.invoke(response.orEmpty())
+                onComplete.invoke(response!!)
             } catch (e: Exception) {
                 Log.d("Logs", "GetAllSpecInteractor exception: $e")
             }

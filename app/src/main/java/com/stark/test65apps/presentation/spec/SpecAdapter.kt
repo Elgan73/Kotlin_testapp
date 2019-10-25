@@ -29,7 +29,7 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
     override fun onBindViewHolder(holder: SpecViewHolder, position: Int) {
 
             Log.d("!!!!!!!!", "${personList[position].specialty_id}")
-            holder.titleSpec.text = personList[position].specialty_name
+            holder.titleSpec.text = personList[0].specialty_name
     }
 
     fun setData(personList: List<PersonItem>) {

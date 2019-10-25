@@ -1,6 +1,7 @@
 package com.stark.test65apps.presentation.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
     companion object {
         const val TAG = "DetailsFragment"
         var status = false
-        var _id = ""
+        var _id = 0
         fun newInstance(bundle: Bundle?): DetailPersonFragment {
             val fragment = DetailPersonFragment()
             val args: Bundle = bundle ?: Bundle()
@@ -37,13 +38,15 @@ class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _id = arguments?.getString(AppsConstants.DETAILS_BUNDLE_KEY_ID).orEmpty()
-        mDetailPersonPresenter.loadPersonById(id)
+        _id = arguments!!.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
+        mDetailPersonPresenter.loadPersonById(_id)
 
     }
 
     override fun setData(data: PersonItem) {
 //        val date : Date? = null
+
+        Log.d("Loooooooogs", "vot takoe: ${data.f_name}")
         Picasso.get().load(data.avatr_url).into(detail_avatar)
         detail_name.text = data.f_name
         detail_surname.text = data.l_name

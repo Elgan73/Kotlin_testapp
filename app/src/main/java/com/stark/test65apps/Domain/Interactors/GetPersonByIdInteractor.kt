@@ -1,7 +1,6 @@
 package com.stark.test65apps.Domain.Interactors
 
 import android.util.Log
-import android.widget.GridLayout
 import com.stark.test65apps.App
 import com.stark.test65apps.presentation.persons.PersonItem
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +15,7 @@ object GetPersonByIdInteractor {
             val response = App.personRepository.getPersonById(id)
 
             try {
-                onComplete.invoke(response!![0])
+                onComplete.invoke(response)
             } catch (e: Exception) {
                 Log.d("Logs", "GetPersonByIdInteractor exception: $e")
             }
