@@ -19,13 +19,13 @@ class SpecPresenter: MvpPresenter<SpecView>() {
 
     private fun loadData() {
         LoadDataInteractor.execute {
-            App.personRepository.savedAllData(it.responseData)
+            App.personRepository.savedAllData(it)
             getData()
         }
     }
 
     fun getData() {
-        GetAllSpecInteractor.execute {
+        GetAllSpecInteractor.execute() {
             if (it.isEmpty()) {
                 loadData()
             } else setData(it)

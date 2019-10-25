@@ -8,10 +8,10 @@ import kotlinx.coroutines.launch
 
 class DetailPersonPresenter : MvpPresenter<DetailPersonView>() {
 
-    fun loadPersonById(_id: Int) {
-        GetPersonByIdInteractor.execute(_id) {
+    fun loadPersonById(id: Int) {
+        GetPersonByIdInteractor.execute(id) {
             CoroutineScope(Dispatchers.Main).launch {
-                viewState.setData(it[0])
+                viewState.setData(it)
             }
         }
     }

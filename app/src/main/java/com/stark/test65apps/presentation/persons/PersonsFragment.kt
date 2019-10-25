@@ -5,19 +5,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.R
+import kotlinx.android.synthetic.main.person_fragment.*
 
 class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     companion object {
         const val TAG = "PersonFragment"
 
-        lateinit var recView: RecyclerView
         val personAdapter = PersonAdapter()
         fun newInstance():PersonsFragment {
-            val fragment: PersonsFragment = PersonsFragment()
+            val fragment = PersonsFragment()
             val args: Bundle = Bundle()
             fragment.arguments = args
             return fragment
@@ -25,7 +28,7 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     }
 
     @InjectPresenter
-    lateinit var mPersonsFragment: PersonsFragment
+    lateinit var mPersonsPresenter: PersonsPresenter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,12 +40,29 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        person_swipeToRefresh.setOnRefreshListener {
-//            mPersonsFragment.getData(resources.getStringArray()[spinnerPosition])
-//        }
+            recViewPerson.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = personAdapter
+            }
+
+            personAdapter.setItemClickListener { personItem ->
+                mPersonsPresenter.onItemClick(personItem)
+            }
+
+        mPersonsPresenter.getData()
+
     }
+
+
 
     override fun setAdapterData(data: List<PersonItem>) {
-
+        personAdapter.setData(data)
     }
+
+    override fun onResume() {
+        super.onResume()
+        mPersonsPresenter.getData()
+    }
+
+
 }

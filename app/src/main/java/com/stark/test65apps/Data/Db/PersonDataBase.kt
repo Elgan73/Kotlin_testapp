@@ -9,7 +9,7 @@ import com.stark.test65apps.Data.Db.Dao.PersonDao
 import com.stark.test65apps.Data.Db.Entity.PersonEntity
 
 
-@Database(entities = [PersonEntity::class], version = AppsConstants.DATABASE_VER, exportSchema = false)
+@Database(entities = [PersonEntity::class], version = 2, exportSchema = false)
 abstract class PersonDataBase: RoomDatabase() {
     abstract fun personDao(): PersonDao
 

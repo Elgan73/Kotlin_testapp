@@ -1,31 +1,80 @@
 package com.stark.test65apps.presentation.persons
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import com.stark.test65apps.R
 import kotlinx.android.synthetic.main.person_item.view.*
+import java.lang.reflect.Parameter
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 
 class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
-    private val personList : List<PersonItem> = emptyList()
-    private val itemClickListener: ((PersonItem) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonAdapter.PersonViewHolder {
-        return PersonViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.person_item, parent, false))
+    private var personList: MutableList<PersonItem> = mutableListOf()
+    private var itemClickListener: ((PersonItem) -> Unit)? = null
+    val DATE_FORMAT = "dd-MM-yyyy"
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
+        return PersonViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                com.stark.test65apps.R.layout.person_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
         return personList.size
     }
 
-    override fun onBindViewHolder(holder: PersonAdapter.PersonViewHolder, position: Int) {
-        holder.namePerson.text = personList[position].f_name
-        holder.surnamePerson.text = personList[position].l_name
-        holder.bdayPerson.text = personList[position].birthday
-        Picasso.get().load(personList[position].avatr_url).into(holder.avatarPerson)
+    override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
+
+
+        var nPers = personList[position].f_name
+        nPers = nPers.substring(0, 1).toUpperCase() + nPers.substring(1).toLowerCase()
+        holder.namePerson.text = nPers
+
+        var sPers = personList[position].l_name
+        sPers = sPers.substring(0, 1).toUpperCase() + sPers.substring(1).toLowerCase()
+        holder.surnamePerson.text = sPers
+        if (personList[position].birthday.isNullOrBlank()) {
+            holder.bdayPerson.text = "Лохматый год"
+        } else {
+            val a = personList[position].birthday
+            val df = SimpleDateFormat(DATE_FORMAT)
+            val df2 = SimpleDateFormat("yyyy-MM-dd")
+            val date = df.parse(a)
+            val corDate = df.format(date)
+            holder.bdayPerson.text = date.toString()
+
+        }
+
+
+
+        if (personList[position].avatr_url.isNullOrBlank()) {
+            Picasso.get().load("https://openssource.info/data/avatars/m/24/24852.jpg").into(holder.avatarPerson)
+        } else {
+            Picasso.get().load(personList[position].avatr_url).into(holder.avatarPerson)
+        }
         holder.specPerson.text = personList[position].specialty_name
+    }
+
+    fun setData(personList: List<PersonItem>) {
+        this.personList = personList as MutableList<PersonItem>
+        notifyDataSetChanged()
+    }
+
+    fun setItemClickListener(itemClickListener: ((PersonItem) -> Unit)?) {
+        this.itemClickListener = itemClickListener
     }
 
     inner class PersonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -43,3 +92,5 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
         }
     }
 }
+
+

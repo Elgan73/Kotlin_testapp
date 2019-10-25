@@ -10,8 +10,8 @@ data class PersonEntity (
     @PrimaryKey(autoGenerate = true) val id: Int? = null,
     @ColumnInfo(name = "f_name")val f_name: String,
     @ColumnInfo(name = "l_name")val l_name: String,
-    @ColumnInfo(name = "birthday")val birthday: String,
-    @ColumnInfo(name = "avatr_url")val avatr_url: String,
+    @ColumnInfo(name = "birthday")val birthday: String?,
+    @ColumnInfo(name = "avatr_url")val avatr_url: String?,
     @ColumnInfo(name = "specialty_id")val specialty_id: Int,
     @ColumnInfo(name = "specialty_name")val specialty_name: String
 )

@@ -1,10 +1,9 @@
 package com.stark.test65apps.Data.Db
 
+import androidx.lifecycle.Transformations.map
 import com.stark.test65apps.App
 import com.stark.test65apps.Data.Db.Entity.PersonEntity
-import com.stark.test65apps.Domain.Dataclasess.PersonModel
-import com.stark.test65apps.Domain.Dataclasess.PersonResponse
-import com.stark.test65apps.Domain.Dataclasess.Spec
+import com.stark.test65apps.Domain.Dataclasess.Person
 import com.stark.test65apps.presentation.persons.PersonItem
 
 object PersonRepository {
@@ -24,19 +23,14 @@ object PersonRepository {
         )
     }
 
-    fun savedAllData(data: List<PersonModel>) = App.personDataBase?.personDao()?.insertAll(data.map {
+    fun savedAllData(data: Person) = App.personDataBase?.personDao()?.insertAll(data.response.map {
         PersonEntity(
-
             f_name = it.f_name,
             l_name = it.l_name,
             birthday = it.birthday,
             avatr_url = it.avatr_url,
             specialty_id = it.specialty[0].specialty_id,
             specialty_name = it.specialty[0].name
-
-
-
-
         )
     })
 

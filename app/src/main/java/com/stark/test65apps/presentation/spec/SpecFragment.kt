@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.stark.test65apps.Domain.Dataclasess.PersonModel
 import com.stark.test65apps.R
 import com.stark.test65apps.presentation.persons.PersonItem
 import com.stark.test65apps.presentation.persons.PersonsFragment
@@ -26,7 +25,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemClickLis
         val specAdapter = SpecAdapter()
 
         fun newInstance(): SpecFragment {
-            val fragment: SpecFragment = SpecFragment()
+            val fragment = SpecFragment()
             val args: Bundle = Bundle()
             fragment.arguments = args
             return fragment

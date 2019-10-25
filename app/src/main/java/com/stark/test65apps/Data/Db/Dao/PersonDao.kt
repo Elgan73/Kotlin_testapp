@@ -5,9 +5,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.stark.test65apps.AppsConstants
 import com.stark.test65apps.Data.Db.Entity.PersonEntity
-import com.stark.test65apps.Domain.Dataclasess.PersonModel
-import com.stark.test65apps.Domain.Dataclasess.PersonResponse
-import com.stark.test65apps.Domain.Dataclasess.Spec
 
 
 @Dao
