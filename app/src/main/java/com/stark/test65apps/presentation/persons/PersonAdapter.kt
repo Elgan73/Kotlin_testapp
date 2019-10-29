@@ -1,7 +1,5 @@
 package com.stark.test65apps.presentation.persons
 
-import android.text.format.DateFormat.format
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,21 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.stark.test65apps.R
 import kotlinx.android.synthetic.main.person_item.view.*
-import java.lang.Exception
-import java.lang.reflect.Parameter
-import java.text.DateFormat
-import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 
 class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
 
     private var personList: MutableList<PersonItem> = mutableListOf()
     private var itemClickListener: ((PersonItem) -> Unit)? = null
-    val DATE_FORMAT = "dd-MM-yyyy"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
         return PersonViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.person_item, parent, false))
@@ -42,7 +32,7 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
         sPers = sPers.substring(0, 1).toUpperCase() + sPers.substring(1).toLowerCase()
         holder.surnamePerson.text = sPers
         if (personList[position].birthday.isNullOrBlank()) {
-            holder.bdayPerson.text = "Лохматый год"
+            holder.bdayPerson.text = "--"
         } else {
             val persDate = personList[position].birthday
             val reversDate = SimpleDateFormat("yyyy-MM-dd")
@@ -60,7 +50,7 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
             }
         }
         if (personList[position].avatr_url.isNullOrBlank()) {
-            Picasso.get().load("https://openssource.info/data/avatars/m/24/24852.jpg").into(holder.avatarPerson)
+            Picasso.get().load("https://sun9-48.userapi.com/c856020/v856020820/144058/JUFBqsiQlKw.jpg").into(holder.avatarPerson)
         } else {
             Picasso.get().load(personList[position].avatr_url).into(holder.avatarPerson)
         }

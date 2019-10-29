@@ -50,11 +50,12 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
                 mPersonsPresenter.onItemClick(personItem)
             }
 
-        if (arguments == null) {
-            Log.d("Logs", "Arguments is null")
-        } else {
+        if (arguments != null) {
+
             val specId = arguments?.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
             mPersonsPresenter.getPerSpecData(specId!!)
+        } else {
+            Log.d("Logs", "Arguments is null")
         }
         mPersonsPresenter.getData()
     }

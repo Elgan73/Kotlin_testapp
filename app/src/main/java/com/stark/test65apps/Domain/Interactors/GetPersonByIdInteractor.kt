@@ -16,12 +16,15 @@ object GetPersonByIdInteractor {
     fun execute(id: Int, onComplete: (PersonItem) -> Unit) {
 
         CoroutineScope(Dispatchers.Default).launch {
-            val response = App.personRepository.getOneById(id)
+
             try {
-                if (response!!.isEmpty()) {
+                val response = App.personRepository.getOneById(id)
+                if (response.isNullOrEmpty()) {
                     Log.d("respLogs", "Response is empty")
                 } else {
                     response.forEach {
+                        Log.d("Response", "Resp: ${it.f_name}||${it.l_name}||${it.avatr_url}||${it.birthday}||${it.specialty_name}||${it.specialty_id}||${it.id}")
+                        ///Совершенно не понятно, что здесь происходит: Данные есть, по факту вываливается в эксепшн
                         onComplete.invoke(it)
                     }
                 }
