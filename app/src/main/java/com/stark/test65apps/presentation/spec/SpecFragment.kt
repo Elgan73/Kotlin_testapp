@@ -18,7 +18,8 @@ import com.stark.test65apps.presentation.persons.PersonsFragment
 import kotlinx.android.synthetic.main.fragment_spec.*
 import kotlinx.android.synthetic.main.fragment_spec.view.*
 
-class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemClickListener {
+class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelectedListener {
+
 
     companion object {
         const val TAG = "SpecialtyFragment"
@@ -36,12 +37,9 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemClickLis
     @InjectPresenter
     lateinit var mSpecPresenter: SpecPresenter
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("Logs", "SpecialtyFragment")
         return inflater.inflate(R.layout.fragment_spec, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,31 +48,28 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemClickLis
         specAdapter.setItemsClickListener { PersonItem ->
             mSpecPresenter.onItemClick(PersonItem)
         }
-
         recView = view.specRecView
         recView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = specAdapter
         }
-
-//        mSpecPresenter.getData(resources.getStringArray(R.array.))
-
-
-
-
+        mSpecPresenter.getData()
     }
 
     override fun setAdapterData(data: List<PersonItem>) {
         specAdapter.setData(data)
-
     }
 
     override fun showMessage(error: String) {
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        mSpecPresenter.getData(id.toInt())
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        Log.d("!!!!!!!!!", "isPressed")
+        mSpecPresenter.getData()
+
     }
 
 }

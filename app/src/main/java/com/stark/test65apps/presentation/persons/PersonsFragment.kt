@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.stark.test65apps.AppsConstants
 import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.R
 import kotlinx.android.synthetic.main.person_fragment.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.person_fragment.*
 class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     companion object {
         const val TAG = "PersonFragment"
-
+        val specId = 0
         val personAdapter = PersonAdapter()
         fun newInstance():PersonsFragment {
             val fragment = PersonsFragment()
@@ -48,8 +49,9 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
             personAdapter.setItemClickListener { personItem ->
                 mPersonsPresenter.onItemClick(personItem)
             }
-
+//        specId = arguments!!.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
         mPersonsPresenter.getData()
+        mPersonsPresenter.getPerSpecData(specId)
 
     }
 
@@ -62,6 +64,7 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     override fun onResume() {
         super.onResume()
         mPersonsPresenter.getData()
+//        mPersonsPresenter.getPerSpecData(data[position].specialty_id)
     }
 
 

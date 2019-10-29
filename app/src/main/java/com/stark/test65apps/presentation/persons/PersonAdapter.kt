@@ -1,12 +1,15 @@
 package com.stark.test65apps.presentation.persons
 
+import android.text.format.DateFormat.format
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.stark.test65apps.R
 import kotlinx.android.synthetic.main.person_item.view.*
+import java.lang.Exception
 import java.lang.reflect.Parameter
 import java.text.DateFormat
 import java.text.ParseException
@@ -23,13 +26,7 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
     val DATE_FORMAT = "dd-MM-yyyy"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
-        return PersonViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                com.stark.test65apps.R.layout.person_item,
-                parent,
-                false
-            )
-        )
+        return PersonViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.person_item, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -37,8 +34,6 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
-
-
         var nPers = personList[position].f_name
         nPers = nPers.substring(0, 1).toUpperCase() + nPers.substring(1).toLowerCase()
         holder.namePerson.text = nPers
@@ -49,17 +44,21 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
         if (personList[position].birthday.isNullOrBlank()) {
             holder.bdayPerson.text = "Лохматый год"
         } else {
-            val a = personList[position].birthday
-            val df = SimpleDateFormat(DATE_FORMAT)
-            val df2 = SimpleDateFormat("yyyy-MM-dd")
-            val date = df.parse(a)
-            val corDate = df.format(date)
-            holder.bdayPerson.text = date.toString()
-
+            val persDate = personList[position].birthday
+            val reversDate = SimpleDateFormat("yyyy-MM-dd")
+            val correctDate = SimpleDateFormat("dd-MM-yyyy")
+            val date = SimpleDateFormat("dd.MM.yyyy")
+            val aaa = reversDate.parse(persDate)
+            val aA = date.format(aaa)
+            val bbb = correctDate.parse(persDate)
+            val bB = date.format(bbb)
+            val patternDate = Regex(pattern = """\d{4}-\d{2}-\d{2}""")
+            if (persDate!!.matches(patternDate)) {
+                holder.bdayPerson.text = aA
+            } else {
+                holder.bdayPerson.text = bB
+            }
         }
-
-
-
         if (personList[position].avatr_url.isNullOrBlank()) {
             Picasso.get().load("https://openssource.info/data/avatars/m/24/24852.jpg").into(holder.avatarPerson)
         } else {

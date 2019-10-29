@@ -11,7 +11,4 @@
             android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
-
 </LinearLayout>

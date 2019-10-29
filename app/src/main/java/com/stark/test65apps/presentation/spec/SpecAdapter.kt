@@ -11,11 +11,12 @@ import com.stark.test65apps.Domain.Dataclasess.Specialty
 import com.stark.test65apps.R
 import com.stark.test65apps.presentation.persons.PersonItem
 import kotlinx.android.synthetic.main.item_spec.view.*
+import java.util.*
+import kotlin.collections.HashSet
 
 class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
 
     private var personList: List<PersonItem> = emptyList()
-    private var person: List<Person> = emptyList()
     private var itemClickListener: ((PersonItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecViewHolder {
@@ -23,13 +24,34 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return personList.size
+        val foundString = HashSet<String>()
+        val duplicates = HashSet<String>()
+        for (i in personList) {
+            if (foundString.contains(i.specialty_name)) {
+                duplicates.add(i.specialty_name)
+            } else {
+                foundString.add(i.specialty_name)
+            }
+        }
+        return foundString.size
     }
 
-    override fun onBindViewHolder(holder: SpecViewHolder, position: Int) {
 
-            Log.d("!!!!!!!!", "${personList[position].specialty_id}")
-            holder.titleSpec.text = personList[0].specialty_name
+
+    override fun onBindViewHolder(holder: SpecViewHolder, position: Int) {
+            val foundString = HashSet<String>()
+            val duplicates = HashSet<String>()
+            for (i in personList) {
+                if (foundString.contains(i.specialty_name)) {
+                    duplicates.add(i.specialty_name)
+                } else {
+                    foundString.add(i.specialty_name)
+                }
+            }
+        Log.d("Hash", "$foundString")
+            holder.titleSpec.text = foundString.toString()
+
+
     }
 
     fun setData(personList: List<PersonItem>) {
@@ -38,6 +60,7 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
     }
 
     fun setItemsClickListener(itemClickListener: ((PersonItem) -> Unit)?) {
+
         this.itemClickListener = itemClickListener
     }
 
@@ -47,7 +70,8 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
 
 
         init {
-            item.setOnClickListener {
+            titleSpec.setOnClickListener {
+                Log.d("fdgfbfb", "dgndgngdngdndgngdn")
                 itemClickListener?.invoke(personList[adapterPosition])
             }
         }

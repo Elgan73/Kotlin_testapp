@@ -7,7 +7,7 @@ import com.stark.test65apps.AppsConstants
 
 @Entity(tableName = AppsConstants.TABLE_NAME)
 data class PersonEntity (
-    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) val _id: Int,
     @ColumnInfo(name = "f_name")val f_name: String,
     @ColumnInfo(name = "l_name")val l_name: String,
     @ColumnInfo(name = "birthday")val birthday: String?,

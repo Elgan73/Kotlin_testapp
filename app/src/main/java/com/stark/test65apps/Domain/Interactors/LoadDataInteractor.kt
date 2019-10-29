@@ -18,10 +18,6 @@ object LoadDataInteractor {
 
             try {
                 onComplete?.invoke(response.body()!!)
-
-
-
-
             } catch (e: Exception) {
                 Log.d("LogsError", "LoadDataInteractor error: $e")
             }

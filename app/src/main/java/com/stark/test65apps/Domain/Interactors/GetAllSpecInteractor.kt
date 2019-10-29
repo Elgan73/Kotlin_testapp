@@ -11,9 +11,9 @@ import java.lang.Exception
 
 object GetAllSpecInteractor {
 
-    fun execute(spec: Int, onComplete: (List<PersonItem>) -> Unit) {
+    fun execute(onComplete: (List<PersonItem>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = App.personRepository.getSpec(spec)
+            val response = App.personRepository.getSpec()
 
             try {
                 onComplete.invoke(response!!)

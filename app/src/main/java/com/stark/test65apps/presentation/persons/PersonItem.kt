@@ -3,7 +3,7 @@ package com.stark.test65apps.presentation.persons
 
 class PersonItem(
 
-    var id : Int? = null,
+    var id : Int,
     var f_name : String,
     var l_name : String,
     var birthday : String? = null,

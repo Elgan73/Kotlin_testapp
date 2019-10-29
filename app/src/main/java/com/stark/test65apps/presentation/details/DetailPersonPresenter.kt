@@ -4,6 +4,7 @@ import com.arellomobile.mvp.MvpPresenter
 import com.stark.test65apps.Domain.Interactors.GetPersonByIdInteractor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class DetailPersonPresenter : MvpPresenter<DetailPersonView>() {

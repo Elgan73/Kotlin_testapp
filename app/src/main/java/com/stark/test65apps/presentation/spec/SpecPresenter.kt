@@ -5,9 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.stark.test65apps.App
 import com.stark.test65apps.AppsConstants
-import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.Domain.Interactors.GetAllSpecInteractor
-import com.stark.test65apps.Domain.Interactors.GetPersonBySpecInteractor
 import com.stark.test65apps.Domain.Interactors.LoadDataInteractor
 import com.stark.test65apps.Navigation.Screens
 import com.stark.test65apps.presentation.persons.PersonItem
@@ -17,19 +15,18 @@ import kotlinx.coroutines.launch
 
 @InjectViewState
 class SpecPresenter: MvpPresenter<SpecView>() {
-    private var spec = 101
 
-    private fun loadData(spec: Int) {
+    private fun loadData() {
         LoadDataInteractor.execute {
             App.personRepository.savedAllData(it)
-            getData(spec)
+            getData()
         }
     }
 
-    fun getData(spec: Int) {
-        GetAllSpecInteractor.execute(spec) {
+    fun getData() {
+        GetAllSpecInteractor.execute {
             if (it.isEmpty()) {
-                loadData(spec)
+                loadData()
             } else setData(it)
         }
     }

@@ -1,6 +1,5 @@
 package com.stark.test65apps.Data.Db
 
-import androidx.lifecycle.Transformations.map
 import com.stark.test65apps.App
 import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.Domain.Dataclasess.Person
@@ -10,7 +9,7 @@ object PersonRepository {
 
     fun getAllPerson(): List<PersonItem>? = App.personDataBase?.personDao()?.getAllPerson()?.map {
         PersonItem(
-            id = it.id,
+            id = it._id,
             f_name = it.f_name,
             l_name = it.l_name,
             birthday = it.birthday,
@@ -22,6 +21,7 @@ object PersonRepository {
 
     fun savedAllData(data: Person) = App.personDataBase?.personDao()?.insertAll(data.response.map {
         PersonEntity(
+            _id = 0,
             f_name = it.f_name,
             l_name = it.l_name,
             birthday = it.birthday,
@@ -31,9 +31,9 @@ object PersonRepository {
         )
     })
 
-    fun getAllPersonBySpec(): List<PersonItem>? = App.personDataBase?.personDao()?.getAllPersonBySpec()?.map {
+    fun getAllPersonBySpec(spec: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getAllPersonBySpec(spec)?.map {
         PersonItem(
-            id = it.id,
+            id = it._id,
             f_name = it.f_name,
             l_name = it.l_name,
             birthday = it.birthday,
@@ -43,9 +43,9 @@ object PersonRepository {
         )
     }
 
-    fun getSpec(spec: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getAllSpec(spec)?.map {
+    fun getSpec(): List<PersonItem>? = App.personDataBase?.personDao()?.getAllSpec()?.map {
         PersonItem(
-            id = it.id,
+            id = it._id,
             f_name = it.f_name,
             l_name = it.l_name,
             birthday = it.birthday,
@@ -55,9 +55,9 @@ object PersonRepository {
         )
     }
 
-    fun  getPersonById(id: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getPersonById(id)?.map {
+    fun  getOneById(id: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getPersonById(id)?.map {
         PersonItem(
-            id = it.id,
+            id = it._id,
             f_name = it.f_name,
             l_name = it.l_name,
             birthday = it.birthday,
