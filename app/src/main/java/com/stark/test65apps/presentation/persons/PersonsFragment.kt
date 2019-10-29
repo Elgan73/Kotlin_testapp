@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.person_fragment.*
 class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     companion object {
         const val TAG = "PersonFragment"
-        val specId = 0
         val personAdapter = PersonAdapter()
+//        val id = ""
         fun newInstance():PersonsFragment {
             val fragment = PersonsFragment()
             val args: Bundle = Bundle()
@@ -34,13 +34,13 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("Logs", "PersonFragment")
+
         return inflater.inflate(R.layout.person_fragment, container, false)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
             recViewPerson.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = personAdapter
@@ -49,13 +49,15 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
             personAdapter.setItemClickListener { personItem ->
                 mPersonsPresenter.onItemClick(personItem)
             }
-//        specId = arguments!!.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
+
+        if (arguments == null) {
+            Log.d("Logs", "Arguments is null")
+        } else {
+            val specId = arguments?.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
+            mPersonsPresenter.getPerSpecData(specId!!)
+        }
         mPersonsPresenter.getData()
-        mPersonsPresenter.getPerSpecData(specId)
-
     }
-
-
 
     override fun setAdapterData(data: List<PersonItem>) {
         personAdapter.setData(data)
@@ -64,7 +66,12 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     override fun onResume() {
         super.onResume()
         mPersonsPresenter.getData()
-//        mPersonsPresenter.getPerSpecData(data[position].specialty_id)
+//        if (arguments == null) {
+//            Log.d("Logs", "Arguments is null")
+//        } else {
+//            val specId = arguments?.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
+//            mPersonsPresenter.getPerSpecData(specId!!)
+//        }
     }
 
 

@@ -24,8 +24,8 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        val foundString = HashSet<String>()
-        val duplicates = HashSet<String>()
+        val foundString = mutableListOf<String>()
+        val duplicates = mutableListOf<String>()
         for (i in personList) {
             if (foundString.contains(i.specialty_name)) {
                 duplicates.add(i.specialty_name)
@@ -36,11 +36,10 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
         return foundString.size
     }
 
-
-
     override fun onBindViewHolder(holder: SpecViewHolder, position: Int) {
-            val foundString = HashSet<String>()
-            val duplicates = HashSet<String>()
+
+            val foundString = mutableListOf<String>()
+            val duplicates = mutableListOf<String>()
             for (i in personList) {
                 if (foundString.contains(i.specialty_name)) {
                     duplicates.add(i.specialty_name)
@@ -48,10 +47,8 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
                     foundString.add(i.specialty_name)
                 }
             }
-        Log.d("Hash", "$foundString")
-            holder.titleSpec.text = foundString.toString()
-
-
+            Log.d("LogsDupl", "vot: $foundString")
+            holder.titleSpec.text = foundString[position]
     }
 
     fun setData(personList: List<PersonItem>) {
@@ -71,7 +68,6 @@ class SpecAdapter : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
 
         init {
             titleSpec.setOnClickListener {
-                Log.d("fdgfbfb", "dgndgngdngdndgngdn")
                 itemClickListener?.invoke(personList[adapterPosition])
             }
         }

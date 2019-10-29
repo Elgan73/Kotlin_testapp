@@ -2,6 +2,8 @@ package com.stark.test65apps.Domain.Interactors
 
 import android.util.Log
 import com.stark.test65apps.App
+import com.stark.test65apps.AppsConstants
+import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.presentation.persons.PersonItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,15 +18,17 @@ object GetPersonByIdInteractor {
         CoroutineScope(Dispatchers.Default).launch {
             val response = App.personRepository.getOneById(id)
             try {
-
-                onComplete.invoke(response!![0])
+                if (response!!.isEmpty()) {
+                    Log.d("respLogs", "Response is empty")
+                } else {
+                    response.forEach {
+                        onComplete.invoke(it)
+                    }
+                }
 
             } catch (e: Exception) {
                 Log.d("Logs", "GetPersonByIdInteractor exception: $e")
             }
         }
-
     }
-
-
 }

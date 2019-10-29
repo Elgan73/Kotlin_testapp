@@ -16,11 +16,9 @@ import kotlinx.android.synthetic.main.fragment_detail_person.*
 class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
     companion object {
         const val TAG = "DetailsFragment"
-        var _id = 0
         fun newInstance(bundle: Bundle?): DetailPersonFragment {
             val fragment = DetailPersonFragment()
             val args: Bundle = bundle ?: Bundle()
-
             fragment.arguments = args
             return fragment
         }
@@ -36,10 +34,8 @@ class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("Loooooogs", "Details Fragment")
-        _id = arguments!!.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
+        val _id = arguments!!.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
         mDetailPersonPresenter.loadPersonById(_id)
-
-
     }
 
     override fun setData(data: PersonItem) {

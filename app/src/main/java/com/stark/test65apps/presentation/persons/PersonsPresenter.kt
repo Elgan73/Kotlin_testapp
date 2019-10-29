@@ -17,13 +17,6 @@ import java.text.SimpleDateFormat
 @InjectViewState
 class PersonsPresenter: MvpPresenter<PersonsView>() {
 
-
-    fun onItemClick(personItem: PersonItem) {
-        val bundle = Bundle()
-        bundle.putInt(AppsConstants.DETAILS_BUNDLE_KEY_ID, personItem.specialty_id)
-        App.fragmentRouter.navigateTo(Screens.FRAGMENTS.DETAIL_FRAGMENT, bundle)
-    }
-
     fun getData() {
         GetAllPersonsInteractor.execute {
             CoroutineScope(Dispatchers.Main).launch {
@@ -33,12 +26,17 @@ class PersonsPresenter: MvpPresenter<PersonsView>() {
     }
 
     fun getPerSpecData(spec: Int) {
-
         GetPersonBySpecInteractor.execute(spec) {
             CoroutineScope(Dispatchers.Main).launch {
                 viewState.setAdapterData(it)
             }
         }
+    }
+
+    fun onItemClick(personItem: PersonItem) {
+        val bundle = Bundle()
+        bundle.putInt(AppsConstants.DETAILS_BUNDLE_KEY_ID, personItem.id)
+        App.fragmentRouter.replace(Screens.FRAGMENTS.DETAIL_FRAGMENT, bundle)
     }
 
 

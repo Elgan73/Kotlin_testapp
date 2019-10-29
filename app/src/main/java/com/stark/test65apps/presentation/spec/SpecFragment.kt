@@ -46,6 +46,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
         super.onViewCreated(view, savedInstanceState)
 
         specAdapter.setItemsClickListener { PersonItem ->
+
             mSpecPresenter.onItemClick(PersonItem)
         }
         recView = view.specRecView
@@ -53,6 +54,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
             layoutManager = LinearLayoutManager(context)
             adapter = specAdapter
         }
+
         mSpecPresenter.getData()
     }
 
@@ -67,7 +69,6 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
     override fun onNothingSelected(parent: AdapterView<*>?) {}
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Log.d("!!!!!!!!!", "isPressed")
         mSpecPresenter.getData()
 
     }

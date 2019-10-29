@@ -31,7 +31,7 @@ object PersonRepository {
         )
     })
 
-    fun getAllPersonBySpec(spec: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getAllPersonBySpec(spec)?.map {
+    fun getAllPersonBySpec(specialty_id: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getAllPersonBySpec(specialty_id)?.map {
         PersonItem(
             id = it._id,
             f_name = it.f_name,
