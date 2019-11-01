@@ -20,15 +20,12 @@ import kotlinx.android.synthetic.main.fragment_spec.view.*
 
 class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelectedListener {
 
-
     companion object {
         const val TAG = "SpecialtyFragment"
         lateinit var recView: RecyclerView
-        val specAdapter = SpecAdapter()
-
-        fun newInstance(): SpecFragment {
+        fun newInstance(bundle: Bundle?, specId: Int, specName: String): SpecFragment {
             val fragment = SpecFragment()
-            val args: Bundle = Bundle()
+            val args: Bundle = bundle ?: Bundle()
             fragment.arguments = args
             return fragment
         }
@@ -37,6 +34,8 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
     @InjectPresenter
     lateinit var mSpecPresenter: SpecPresenter
 
+    private lateinit var specAdapter: SpecAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("Logs", "SpecialtyFragment")
         return inflater.inflate(R.layout.fragment_spec, container, false)
@@ -44,11 +43,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        specAdapter.setItemsClickListener { PersonItem ->
-
-            mSpecPresenter.onItemClick(PersonItem)
-        }
+        specAdapter= SpecAdapter{ mSpecPresenter.onItemClick(it) }
         recView = view.specRecView
         recView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -56,9 +51,9 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
         }
 
         mSpecPresenter.getData()
-    }
+     }
 
-    override fun setAdapterData(data: List<PersonItem>) {
+    override fun setAdapterData(data: List<String>) {
         specAdapter.setData(data)
     }
 
@@ -68,9 +63,6 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
 
     override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        mSpecPresenter.getData()
-
-    }
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
 
 }

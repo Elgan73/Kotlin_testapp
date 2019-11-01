@@ -8,6 +8,6 @@ import com.stark.test65apps.presentation.persons.PersonItem
 
 @StateStrategyType(SkipStrategy::class)
 interface SpecView: MvpView {
-    fun setAdapterData(data: List<PersonItem>)
+    fun setAdapterData(data: List<String>)
     fun showMessage(error: String)
 }

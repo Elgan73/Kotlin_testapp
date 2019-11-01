@@ -9,12 +9,16 @@ import kotlinx.coroutines.launch
 
 object GetPersonBySpecInteractor {
 
-    fun execute(spec: Int, onComplete: (List<PersonItem>) -> Unit) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = App.personRepository.getAllPersonBySpec(spec)
-
+    fun execute(spec: String, onComplete: (List<PersonItem>) -> Unit) {
+        CoroutineScope(Dispatchers.Default).launch {
             try {
-                onComplete.invoke(response.orEmpty())
+                val response = App.personRepository.getAllPersonBySpec(spec)
+                if(response.isNullOrEmpty()) {
+                    Log.d("Response", "$response")
+                } else {
+                        onComplete.invoke(response)
+
+                }
             } catch (e: Exception) {
             Log.d("Logs", "GetAllPersonBySpecInterractor exception: $e")
             }

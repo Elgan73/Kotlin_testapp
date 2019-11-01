@@ -7,22 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.stark.test65apps.AppsConstants
-import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.R
+import com.stark.test65apps.presentation.persons.PersonsFragment.Companion.personAdapter
 import kotlinx.android.synthetic.main.person_fragment.*
 
-class PersonsFragment: MvpAppCompatFragment(), PersonsView {
+class PersonsFragment : MvpAppCompatFragment(), PersonsView, AdapterView.OnItemSelectedListener {
+
     companion object {
         const val TAG = "PersonFragment"
         val personAdapter = PersonAdapter()
-//        val id = ""
-        fun newInstance():PersonsFragment {
+        fun newInstance(bundle: Bundle?): PersonsFragment {
             val fragment = PersonsFragment()
-            val args: Bundle = Bundle()
+            val args: Bundle = bundle ?: Bundle()
             fragment.arguments = args
             return fragment
         }
@@ -31,33 +30,32 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     @InjectPresenter
     lateinit var mPersonsPresenter: PersonsPresenter
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d("Logs", "PersonFragment")
 
         return inflater.inflate(R.layout.person_fragment, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            recViewPerson.apply {
-                layoutManager = LinearLayoutManager(context)
-                adapter = personAdapter
-            }
-
-            personAdapter.setItemClickListener { personItem ->
-                mPersonsPresenter.onItemClick(personItem)
-            }
-
-        if (arguments != null) {
-
-            val specId = arguments?.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
-            mPersonsPresenter.getPerSpecData(specId!!)
-        } else {
-            Log.d("Logs", "Arguments is null")
+        recViewPerson.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = personAdapter
         }
-        mPersonsPresenter.getData()
+
+        personAdapter.setItemClickListener { personItem ->
+            mPersonsPresenter.onItemClick(personItem)
+        }
+        val specString = arguments?.getString(AppsConstants.PERSON_BY_SPEC)
+        if(arguments != null) {
+            Log.d("ArgsLogs", "Arguments: $arguments")
+            val s = arguments?.getString(AppsConstants.PERSON_BY_SPEC)
+            mPersonsPresenter.getPerSpecData(specString!!)
+        } else {
+            Log.d("ArgsLogs", "Arguments: $arguments")
+            mPersonsPresenter.getData()
+        }
+
     }
 
     override fun setAdapterData(data: List<PersonItem>) {
@@ -67,13 +65,8 @@ class PersonsFragment: MvpAppCompatFragment(), PersonsView {
     override fun onResume() {
         super.onResume()
         mPersonsPresenter.getData()
-//        if (arguments == null) {
-//            Log.d("Logs", "Arguments is null")
-//        } else {
-//            val specId = arguments?.getInt(AppsConstants.DETAILS_BUNDLE_KEY_ID)
-//            mPersonsPresenter.getPerSpecData(specId!!)
-//        }
     }
 
-
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {}
 }
