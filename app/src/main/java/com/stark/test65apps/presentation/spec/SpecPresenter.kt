@@ -10,6 +10,7 @@ import com.stark.test65apps.Domain.Interactors.GetAllSpecInteractor
 import com.stark.test65apps.Domain.Interactors.LoadDataInteractor
 import com.stark.test65apps.Navigation.Screens
 import com.stark.test65apps.presentation.persons.PersonItem
+import com.stark.test65apps.presentation.persons.PersonsFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,20 +41,30 @@ class SpecPresenter : MvpPresenter<SpecView>() {
     private fun setData(data: List<PersonItem>) {
         personItems.addAll(data)
         CoroutineScope(Dispatchers.Main).launch {
-            val idList = mutableListOf<String>()
+            val idList = mutableListOf<Int>()
             data.forEach { item ->
-                if (!idList.contains(item.specialty_name)) {
-                    idList.add(item.specialty_name)
+                if (!idList.contains(item.specialty_id)) {
+                    idList.add(item.specialty_id)
                 }
             }
             viewState.setAdapterData(idList)
         }
     }
 
-    fun onItemClick(id: String) {
+
+//    fun onItemClick(id: Int) {
+//        try{
+//            val bundle = Bundle()
+//            bundle.putInt("tttt", 1)
+//            App.fragmentRouter.navigateTo(Screens.FRAGMENTS.PERSONS_FRAGMENT, bundle)
+//        } catch (e: Exception) {
+//            Log.d("Exception", "$e")
+//        }
+//    }
+    fun onItemClick(id: Int) {
         try {
             val bundle = Bundle()
-            bundle.putString(AppsConstants.PERSON_BY_SPEC, id)
+            bundle.putInt(AppsConstants.PERSON_BY_SPEC, id)
             App.fragmentRouter.replace(Screens.FRAGMENTS.PERSONS_FRAGMENT, bundle)
             Log.d("Bundle", "$id")
         } catch (e: Exception) {

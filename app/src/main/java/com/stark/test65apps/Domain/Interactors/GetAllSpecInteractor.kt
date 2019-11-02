@@ -16,7 +16,12 @@ object GetAllSpecInteractor {
             val response = App.personRepository.getSpec()
 
             try {
-                onComplete.invoke(response!!)
+                if (!response.isNullOrEmpty()) {
+                    onComplete.invoke(response)
+                } else {
+                    Log.d("responseSpecInt", "$response")
+                }
+
             } catch (e: Exception) {
                 Log.d("Logs", "GetAllSpecInteractor exception: $e")
             }

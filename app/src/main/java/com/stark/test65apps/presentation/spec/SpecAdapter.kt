@@ -7,9 +7,9 @@ import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.stark.test65apps.R
 
-class SpecAdapter(private val itemClickListener: (String) -> Unit) : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
+class SpecAdapter(private val itemClickListener: (Int) -> Unit) : RecyclerView.Adapter<SpecAdapter.SpecViewHolder>() {
 
-    private val personList = mutableListOf<String>()
+    private val personList = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecViewHolder {
         return SpecViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_spec, parent, false)){
@@ -25,18 +25,22 @@ class SpecAdapter(private val itemClickListener: (String) -> Unit) : RecyclerVie
         holder.bind(item)
     }
 
-    fun setData(items: List<String>) {
+    fun setData(items: List<Int>) {
         personList.clear()
         personList.addAll(items)
         notifyDataSetChanged()
     }
 
-    inner class SpecViewHolder(view: View, private val itemClickListener: (String) -> Unit) : RecyclerView.ViewHolder(view) {
+    inner class SpecViewHolder(view: View, private val itemClickListener: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
 
         private val titleSpec = view.findViewById<Button>(R.id.specButton)
 
-        fun bind(item: String){
-            titleSpec.text = item
+        fun bind(item: Int){
+            if (item == 101) {
+                titleSpec.text = "Менеджер"
+            } else {
+                titleSpec.text = "Разработчик"
+            }
             titleSpec.setOnClickListener { itemClickListener.invoke(item) }
         }
     }

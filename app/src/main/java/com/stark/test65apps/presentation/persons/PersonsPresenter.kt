@@ -23,13 +23,13 @@ class PersonsPresenter: MvpPresenter<PersonsView>() {
 
     fun getData() {
         GetAllPersonsInteractor.execute {
-            CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(Dispatchers.Default).launch {
                 viewState.setAdapterData(it)
             }
         }
     }
 
-    fun getPerSpecData(spec: String) {
+    fun getPerSpecData(spec: Int) {
         GetPersonBySpecInteractor.execute(spec) {
             CoroutineScope(Dispatchers.Main).launch {
                 viewState.setAdapterData(it)

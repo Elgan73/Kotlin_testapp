@@ -53,7 +53,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
         mSpecPresenter.getData()
      }
 
-    override fun setAdapterData(data: List<String>) {
+    override fun setAdapterData(data: List<Int>) {
         specAdapter.setData(data)
     }
 

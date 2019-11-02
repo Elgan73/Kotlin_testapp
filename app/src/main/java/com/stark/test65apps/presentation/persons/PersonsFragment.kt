@@ -11,11 +11,11 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.stark.test65apps.AppsConstants
 import com.stark.test65apps.R
-import com.stark.test65apps.presentation.persons.PersonsFragment.Companion.personAdapter
 import kotlinx.android.synthetic.main.person_fragment.*
 
 class PersonsFragment : MvpAppCompatFragment(), PersonsView, AdapterView.OnItemSelectedListener {
 
+    private val mPersonAdapter = PersonAdapter()
     companion object {
         const val TAG = "PersonFragment"
         val personAdapter = PersonAdapter()
@@ -46,25 +46,24 @@ class PersonsFragment : MvpAppCompatFragment(), PersonsView, AdapterView.OnItemS
         personAdapter.setItemClickListener { personItem ->
             mPersonsPresenter.onItemClick(personItem)
         }
-        val specString = arguments?.getString(AppsConstants.PERSON_BY_SPEC)
-        if(arguments != null) {
-            Log.d("ArgsLogs", "Arguments: $arguments")
-            val s = arguments?.getString(AppsConstants.PERSON_BY_SPEC)
-            mPersonsPresenter.getPerSpecData(specString!!)
-        } else {
-            Log.d("ArgsLogs", "Arguments: $arguments")
-            mPersonsPresenter.getData()
-        }
 
+        if (arguments!!.isEmpty) {
+            Log.d("ArgsLogs", "$arguments")
+            mPersonsPresenter.getData()
+        } else {
+            val id = arguments?.getInt(AppsConstants.PERSON_BY_SPEC)
+            mPersonsPresenter.getPerSpecData(id!!)
+        }
     }
 
     override fun setAdapterData(data: List<PersonItem>) {
+        Log.d("AdapterData", "$data")
         personAdapter.setData(data)
+
     }
 
     override fun onResume() {
         super.onResume()
-        mPersonsPresenter.getData()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {}

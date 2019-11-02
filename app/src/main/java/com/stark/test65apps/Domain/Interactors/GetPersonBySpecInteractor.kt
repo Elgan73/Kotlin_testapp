@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 object GetPersonBySpecInteractor {
 
-    fun execute(spec: String, onComplete: (List<PersonItem>) -> Unit) {
+    fun execute(spec: Int, onComplete: (List<PersonItem>) -> Unit) {
         CoroutineScope(Dispatchers.Default).launch {
             try {
                 val response = App.personRepository.getAllPersonBySpec(spec)
@@ -17,6 +17,7 @@ object GetPersonBySpecInteractor {
                     Log.d("Response", "$response")
                 } else {
                         onComplete.invoke(response)
+                    Log.d("Response", "$response")
 
                 }
             } catch (e: Exception) {
