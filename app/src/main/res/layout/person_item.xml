@@ -1,83 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/person_item"
-              android:layout_marginTop="12dp"
-              app:cardCornerRadius="16sp"
-              app:cardElevation="2dp"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:id="@+id/person_item"
+                                                   android:layout_marginTop="12dp"
+                                                   app:cardCornerRadius="22sp"
+                                                   app:cardElevation="4dp"
+
 >
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:orientation="vertical"
+            android:background="@drawable/card_gradient"
 
     >
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/name_person"
-                android:hint="Name"
-                android:textSize="25sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-        />
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/last_name_person"
-                android:hint="Last name"
-                android:textSize="25sp"
-                app:layout_constraintTop_toBottomOf="@id/name_person"
-                app:layout_constraintBottom_toTopOf="@id/bday_person"
-                app:layout_constraintStart_toStartOf="parent"
-        />
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/bday_person"
-                android:hint="B-day"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@id/last_name_person"
-                app:layout_constraintBottom_toTopOf="@id/spec_person"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="10dp"
-        />
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spec_person"
-                android:hint="Specialty"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@id/bday_person"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="10dp"
-
-        />
-
-
-
-
-        <ImageView
+        <com.github.siyamed.shapeimageview.CircularImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/avatar"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:siBorderWidth="3dp"
+                app:siBorderColor="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/ic_person_avatar"
-
+                app:layout_constraintStart_toStartOf="parent"
         />
+
+
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name_person"
+                android:hint="Name"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+
+                app:layout_constraintStart_toEndOf="@+id/avatar"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/last_name_person"
+                android:hint="Last name"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@+id/name_person"
+
+                app:layout_constraintTop_toBottomOf="@+id/name_person"/>
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/age_person"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:hint="100"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintStart_toEndOf="@+id/age_person_place"
+
+                app:layout_constraintBottom_toBottomOf="@+id/age_person_place"
+                app:layout_constraintTop_toTopOf="@+id/age_person_place"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/age_person_place"
+                android:textSize="15sp"
+                android:text="Возраст: "
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintStart_toEndOf="@+id/avatar"
+                app:layout_constraintTop_toBottomOf="@+id/last_name_person"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/spec_person"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spec_person"
+                android:hint="Specialty"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintStart_toEndOf="@+id/avatar"
+                app:layout_constraintBottom_toBottomOf="@+id/avatar"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

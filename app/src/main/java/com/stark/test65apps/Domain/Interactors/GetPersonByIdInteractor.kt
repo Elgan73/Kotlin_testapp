@@ -14,7 +14,7 @@ import java.lang.Exception
 object GetPersonByIdInteractor {
 
     fun execute(id: Int, onComplete: (PersonItem) -> Unit) {
-        CoroutineScope(Dispatchers.Default).launch {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = App.personRepository.getOneById(id)
                 if (response.isNullOrEmpty()) {

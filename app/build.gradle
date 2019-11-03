@@ -30,6 +30,10 @@ dependencies {
     def retrofit2_version = "2.6.0"
     def kotlinCoroutineVersion = "1.1.1"
     def room_version = "2.2.1"
+    def moxy_version = "1.7.0"
+    def picasso_version = "2.71828"
+    def joda_time_version = "2.10.5"
+    def uni_image_loader_version = "1.9.5"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -54,25 +58,23 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit2_version"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
-    //eventBus
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
-
-    implementation 'tech.schoolhelper:moxy-x:1.7.0'
-    implementation 'tech.schoolhelper:moxy-x-androidx:1.7.0'
-    kapt 'tech.schoolhelper:moxy-x-compiler:1.7.0'
-
-//    implementation 'com.arello-mobile:moxy:1.5.5'
-//    kapt 'com.arello-mobile:moxy-compiler:1.5.5'
-//    implementation 'com.arello-mobile:moxy-android:1.5.5'
-//    implementation 'com.arello-mobile:moxy-app-compat:1.5.5'
+    //moxy
+    implementation "tech.schoolhelper:moxy-x:$moxy_version"
+    implementation "tech.schoolhelper:moxy-x-androidx:$moxy_version"
+    kapt "tech.schoolhelper:moxy-x-compiler:$moxy_version"
 
     //Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    //picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
 
     //joda-time
-    implementation 'joda-time:joda-time:2.10.5'
+    implementation "joda-time:joda-time:$joda_time_version"
+
+    //UniversalImageLoader
+    implementation "com.nostra13.universalimageloader:universal-image-loader:$uni_image_loader_version"
+
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 }

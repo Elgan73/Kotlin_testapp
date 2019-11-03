@@ -9,9 +9,9 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.squareup.picasso.Picasso
 import com.stark.test65apps.AppsConstants
-import com.stark.test65apps.R
 import com.stark.test65apps.presentation.persons.PersonItem
 import kotlinx.android.synthetic.main.fragment_detail_person.*
+
 
 class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
     companion object {
@@ -28,7 +28,7 @@ class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
     lateinit var mDetailPersonPresenter: DetailPersonPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_detail_person, container, false)
+        return inflater.inflate(com.stark.test65apps.R.layout.fragment_detail_person, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,6 +61,7 @@ class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
             }
         }
         if (data.avatr_url.isNullOrBlank()) {
+
             Picasso.get().load("https://sun9-48.userapi.com/c856020/v856020820/144058/JUFBqsiQlKw.jpg")
                 .into(detail_avatar)
         } else {

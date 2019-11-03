@@ -23,7 +23,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
     companion object {
         const val TAG = "SpecialtyFragment"
         lateinit var recView: RecyclerView
-        fun newInstance(bundle: Bundle?, specId: Int, specName: String): SpecFragment {
+        fun newInstance(bundle: Bundle?): SpecFragment {
             val fragment = SpecFragment()
             val args: Bundle = bundle ?: Bundle()
             fragment.arguments = args

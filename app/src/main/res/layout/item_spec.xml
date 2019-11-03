@@ -10,5 +10,6 @@
             android:id="@+id/specButton"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:background="@drawable/btn_back"
             android:hint="Spec"/>
 </LinearLayout>

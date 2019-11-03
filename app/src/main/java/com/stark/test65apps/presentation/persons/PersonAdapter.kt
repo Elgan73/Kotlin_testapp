@@ -38,8 +38,11 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
                 holder.bdayPerson.text = PersonsPresenter().age(PersonsPresenter().parseCorrectDate(personDate))
             }
         }
+
         if (personList[position].avatr_url.isNullOrBlank()) {
-            Picasso.get().load("https://sun9-48.userapi.com/c856020/v856020820/144058/JUFBqsiQlKw.jpg")
+            Picasso
+                .get()
+                .load("https://sun9-48.userapi.com/c856020/v856020820/144058/JUFBqsiQlKw.jpg")
                 .into(holder.avatarPerson)
         } else {
             Picasso.get().load(personList[position].avatr_url).into(holder.avatarPerson)
@@ -60,7 +63,7 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
         private val item = view.person_item
         val namePerson = view.name_person
         val surnamePerson = view.last_name_person
-        val bdayPerson = view.bday_person
+        val bdayPerson = view.age_person
         val avatarPerson = view.avatar
         val specPerson = view.spec_person
 

@@ -57,7 +57,7 @@ class PersonsFragment : MvpAppCompatFragment(), PersonsView, AdapterView.OnItemS
     }
 
     override fun setAdapterData(data: List<PersonItem>) {
-        Log.d("AdapterData", "$data")
+
         personAdapter.setData(data)
 
     }

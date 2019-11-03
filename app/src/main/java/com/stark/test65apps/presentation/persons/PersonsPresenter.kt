@@ -17,13 +17,14 @@ import org.joda.time.Years
 import org.joda.time.format.DateTimeFormat
 import org.w3c.dom.Entity
 import java.text.SimpleDateFormat
+import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
 class PersonsPresenter: MvpPresenter<PersonsView>() {
 
     fun getData() {
         GetAllPersonsInteractor.execute {
-            CoroutineScope(Dispatchers.Default).launch {
+            CoroutineScope(Dispatchers.Main).launch {
                 viewState.setAdapterData(it)
             }
         }
@@ -32,6 +33,7 @@ class PersonsPresenter: MvpPresenter<PersonsView>() {
     fun getPerSpecData(spec: Int) {
         GetPersonBySpecInteractor.execute(spec) {
             CoroutineScope(Dispatchers.Main).launch {
+                Log.d("CoroutinesData", "$it")
                 viewState.setAdapterData(it)
             }
         }
@@ -41,7 +43,6 @@ class PersonsPresenter: MvpPresenter<PersonsView>() {
         val bundle = Bundle()
         bundle.putInt(AppsConstants.DETAILS_BUNDLE_KEY_ID, personItem.id)
         App.fragmentRouter.replace(Screens.FRAGMENTS.DETAIL_FRAGMENT, bundle)
-        Log.d("Id personFrag", "${personItem.id}")
     }
 
     fun stringName(string: String): String {
