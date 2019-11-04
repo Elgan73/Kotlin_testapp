@@ -10,14 +10,14 @@ import com.stark.test65apps.Data.Db.Entity.PersonEntity
 
 
 @Database(entities = [PersonEntity::class], version = 1, exportSchema = false)
-abstract class PersonDataBase: RoomDatabase() {
+abstract class PersonDataBase : RoomDatabase() {
     abstract fun personDao(): PersonDao
 
     companion object {
         private var INSTANCE: PersonDataBase? = null
 
         fun getInstance(context: Context): PersonDataBase? {
-            if(INSTANCE == null) {
+            if (INSTANCE == null) {
                 synchronized(PersonDataBase::class) {
                     INSTANCE = Room.databaseBuilder(
                         context,

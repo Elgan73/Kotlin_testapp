@@ -53,10 +53,10 @@ class DetailPersonFragment : MvpAppCompatFragment(), DetailPersonView {
             val persDate = data.birthday
             val patternDate = Regex(pattern = """\d{4}-\d{2}-\d{2}""")
             if (persDate!!.matches(patternDate)) {
-                detail_birthday.text = mDetailPersonPresenter.parseReversDate(persDate)
+                detail_birthday.text = mDetailPersonPresenter.parseReversDate(persDate) + " г."
                 detail_age.text = mDetailPersonPresenter.age(mDetailPersonPresenter.parseReversDate(persDate))
             } else {
-                detail_birthday.text = mDetailPersonPresenter.parseCorrectDate(persDate)
+                detail_birthday.text = mDetailPersonPresenter.parseCorrectDate(persDate) + " г."
                 detail_age.text = mDetailPersonPresenter.age(mDetailPersonPresenter.parseCorrectDate(persDate))
             }
         }

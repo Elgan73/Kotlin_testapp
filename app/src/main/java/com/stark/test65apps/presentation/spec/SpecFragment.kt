@@ -18,7 +18,7 @@ import com.stark.test65apps.presentation.persons.PersonsFragment
 import kotlinx.android.synthetic.main.fragment_spec.*
 import kotlinx.android.synthetic.main.fragment_spec.view.*
 
-class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelectedListener {
+class SpecFragment : MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelectedListener {
 
     companion object {
         const val TAG = "SpecialtyFragment"
@@ -43,7 +43,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        specAdapter= SpecAdapter{ mSpecPresenter.onItemClick(it) }
+        specAdapter = SpecAdapter { mSpecPresenter.onItemClick(it) }
         recView = view.specRecView
         recView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -51,7 +51,7 @@ class SpecFragment: MvpAppCompatFragment(), SpecView, AdapterView.OnItemSelected
         }
 
         mSpecPresenter.getData()
-     }
+    }
 
     override fun setAdapterData(data: List<Int>) {
         specAdapter.setData(data)

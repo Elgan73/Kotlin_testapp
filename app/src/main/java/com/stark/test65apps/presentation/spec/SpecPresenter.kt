@@ -52,7 +52,7 @@ class SpecPresenter : MvpPresenter<SpecView>() {
     }
 
 
-//    fun onItemClick(id: Int) {
+    //    fun onItemClick(id: Int) {
 //        try{
 //            val bundle = Bundle()
 //            bundle.putInt("tttt", 1)

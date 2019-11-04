@@ -31,17 +31,18 @@ object PersonRepository {
         )
     })
 
-    fun getAllPersonBySpec(specialty_id: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getAllPersonBySpec(specialty_id)?.map {
-        PersonItem(
-            id = it._id,
-            f_name = it.f_name,
-            l_name = it.l_name,
-            birthday = it.birthday,
-            avatr_url = it.avatr_url,
-            specialty_id = it.specialty_id,
-            specialty_name = it.specialty_name
-        )
-    }
+    fun getAllPersonBySpec(specialty_id: Int): List<PersonItem>? =
+        App.personDataBase?.personDao()?.getAllPersonBySpec(specialty_id)?.map {
+            PersonItem(
+                id = it._id,
+                f_name = it.f_name,
+                l_name = it.l_name,
+                birthday = it.birthday,
+                avatr_url = it.avatr_url,
+                specialty_id = it.specialty_id,
+                specialty_name = it.specialty_name
+            )
+        }
 
     fun getSpec(): List<PersonItem>? = App.personDataBase?.personDao()?.getAllSpec()?.map {
         PersonItem(
@@ -55,7 +56,7 @@ object PersonRepository {
         )
     }
 
-    fun  getOneById(id: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getPersonById(id)?.map {
+    fun getOneById(id: Int): List<PersonItem>? = App.personDataBase?.personDao()?.getPersonById(id)?.map {
         PersonItem(
             id = it._id,
             f_name = it.f_name,

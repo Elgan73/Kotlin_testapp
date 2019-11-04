@@ -11,7 +11,7 @@ import com.stark.test65apps.Data.Db.Entity.PersonEntity
 @Dao
 interface PersonDao {
     @Query("SELECT * FROM ${AppsConstants.TABLE_NAME}")
-    fun getAllPerson():List<PersonEntity>
+    fun getAllPerson(): List<PersonEntity>
 
     @Query("SELECT * FROM ${AppsConstants.TABLE_NAME} WHERE specialty_id = :spec ")
     fun getAllPersonBySpec(spec: Int): List<PersonEntity>

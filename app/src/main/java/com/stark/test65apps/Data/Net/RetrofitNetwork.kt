@@ -13,5 +13,5 @@ class RetrofitNetwork {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-    val personApi : PersonApi = retrofit().create(PersonApi::class.java)
+    val personApi: PersonApi = retrofit().create(PersonApi::class.java)
 }

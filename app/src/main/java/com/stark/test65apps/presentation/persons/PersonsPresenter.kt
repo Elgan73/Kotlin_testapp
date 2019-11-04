@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat
 import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
-class PersonsPresenter: MvpPresenter<PersonsView>() {
+class PersonsPresenter : MvpPresenter<PersonsView>() {
 
     fun getData() {
         GetAllPersonsInteractor.execute {

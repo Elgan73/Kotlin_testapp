@@ -12,7 +12,7 @@ class SpecAdapter(private val itemClickListener: (Int) -> Unit) : RecyclerView.A
     private val personList = mutableListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecViewHolder {
-        return SpecViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_spec, parent, false)){
+        return SpecViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_spec, parent, false)) {
             itemClickListener.invoke(it)
         }
     }
@@ -31,11 +31,12 @@ class SpecAdapter(private val itemClickListener: (Int) -> Unit) : RecyclerView.A
         notifyDataSetChanged()
     }
 
-    inner class SpecViewHolder(view: View, private val itemClickListener: (Int) -> Unit) : RecyclerView.ViewHolder(view) {
+    inner class SpecViewHolder(view: View, private val itemClickListener: (Int) -> Unit) :
+        RecyclerView.ViewHolder(view) {
 
         private val titleSpec = view.findViewById<Button>(R.id.specButton)
 
-        fun bind(item: Int){
+        fun bind(item: Int) {
             if (item == 101) {
                 titleSpec.text = "Менеджер"
             } else {

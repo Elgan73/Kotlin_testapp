@@ -20,8 +20,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @InjectPresenter
     lateinit var mMainPresenter: MainPresenter
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {item ->
-        when(item.itemId) {
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
             R.id.nav_speciality -> {
                 App.fragmentRouter.replace(Screens.FRAGMENTS.SPEC_FRAGMENT)
                 return@OnNavigationItemSelectedListener true
@@ -40,6 +40,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         mMainPresenter.onStart(supportFragmentManager, R.id.fragment_container, ::finishActivity)
+
+
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
     }

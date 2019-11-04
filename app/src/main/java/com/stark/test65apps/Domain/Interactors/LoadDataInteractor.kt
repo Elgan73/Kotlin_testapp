@@ -17,7 +17,7 @@ object LoadDataInteractor {
             Log.v("Logs", "response: $response")
 
             try {
-                if(response.body() != null) {
+                if (response.body() != null) {
                     onComplete?.invoke(response.body()!!)
                 } else {
                     Log.d("REspBody", "Resp is null: ${response.body()}")

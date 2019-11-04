@@ -13,15 +13,15 @@ object GetPersonBySpecInteractor {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = App.personRepository.getAllPersonBySpec(spec)
-                if(response.isNullOrEmpty()) {
+                if (response.isNullOrEmpty()) {
                     Log.d("Response is Empty", "$response")
                 } else {
-                        onComplete.invoke(response)
+                    onComplete.invoke(response)
                     Log.d("Response!!!!!!!", "$response")
 
                 }
             } catch (e: Exception) {
-            Log.d("Logs", "GetAllPersonBySpecInterractor exception: $e")
+                Log.d("Logs", "GetAllPersonBySpecInterractor exception: $e")
             }
 
         }

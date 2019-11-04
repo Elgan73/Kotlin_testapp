@@ -14,12 +14,12 @@ class Router {
         this.finishActivity = finishActivity
     }
 
-    fun navigateTo(fragment: Screens.FRAGMENTS, bundle: Bundle? = null) {
-        fragmentManager.beginTransaction()
-            .add(containerId, Screens.createFragment(fragment, bundle))
-            .addToBackStack(null)
-            .commit()
-    }
+//    fun navigateTo(fragment: Screens.FRAGMENTS, bundle: Bundle? = null) {
+//        fragmentManager.beginTransaction()
+//            .add(containerId, Screens.createFragment(fragment, bundle))
+//            .addToBackStack(null)
+//            .commit()
+//    }
 
     fun replace(fragment: Screens.FRAGMENTS, bundle: Bundle? = null) {
         fragmentManager.beginTransaction()
@@ -28,7 +28,7 @@ class Router {
     }
 
     fun back() {
-        if(fragmentManager.backStackEntryCount == 1) {
+        if (fragmentManager.backStackEntryCount == 1) {
             finishActivity.invoke()
         } else {
             fragmentManager.popBackStack()

@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.person_fragment.*
 class PersonsFragment : MvpAppCompatFragment(), PersonsView, AdapterView.OnItemSelectedListener {
 
     private val mPersonAdapter = PersonAdapter()
+
     companion object {
         const val TAG = "PersonFragment"
         val personAdapter = PersonAdapter()

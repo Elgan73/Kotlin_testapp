@@ -15,7 +15,7 @@ class App : Application() {
         var context: Context? = null
         var retrofitNetwork = RetrofitNetwork()
         var fragmentRouter = Router()
-        var personDataBase : PersonDataBase? = null
+        var personDataBase: PersonDataBase? = null
         var personRepository = PersonRepository
 
     }

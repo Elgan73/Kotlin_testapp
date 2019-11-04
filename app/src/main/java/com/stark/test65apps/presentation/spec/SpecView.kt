@@ -7,7 +7,7 @@ import com.stark.test65apps.Data.Db.Entity.PersonEntity
 import com.stark.test65apps.presentation.persons.PersonItem
 
 @StateStrategyType(SkipStrategy::class)
-interface SpecView: MvpView {
+interface SpecView : MvpView {
     fun setAdapterData(data: List<Int>)
     fun showMessage(error: String)
 }
