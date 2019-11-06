@@ -17,10 +17,11 @@ class SpecAdapter(private val itemClickListener: (Int) -> Unit) : RecyclerView.A
         }
     }
 
-    override fun getItemCount() = personList.size
+    override fun getItemCount(): Int {
+        return personList.size
+    }
 
     override fun onBindViewHolder(holder: SpecViewHolder, position: Int) {
-
         val item = personList[position]
         holder.bind(item)
     }

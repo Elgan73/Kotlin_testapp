@@ -51,16 +51,6 @@ class SpecPresenter : MvpPresenter<SpecView>() {
         }
     }
 
-
-    //    fun onItemClick(id: Int) {
-//        try{
-//            val bundle = Bundle()
-//            bundle.putInt("tttt", 1)
-//            App.fragmentRouter.navigateTo(Screens.FRAGMENTS.PERSONS_FRAGMENT, bundle)
-//        } catch (e: Exception) {
-//            Log.d("Exception", "$e")
-//        }
-//    }
     fun onItemClick(id: Int) {
         try {
             val bundle = Bundle()
